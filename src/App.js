@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Accepted from "./pages/Accepted";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminHome from "./pages/AdminHome";
+import AdminLogin from "./pages/AdminLogin";
+import ClientDashboard from "./pages/ClientDashboard";
+import ClientHistory from "./pages/ClientHistory";
+import ClientLogin from "./pages/ClientLogin";
+import Decline from "./pages/Decline";
+import Discuss from "./pages/Discuss";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AdminLogin />} />
+          <Route path="/login" element={<ClientLogin />} />
+          <Route path="/home" element={<ClientDashboard />} />
+          <Route path="/history" element={<ClientHistory />} />
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route index element={<AdminHome />} />
+            <Route path="accept" element={<Accepted />} />
+            <Route path="discuss" element={<Discuss />} />
+            <Route path="decline" element={<Decline />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
