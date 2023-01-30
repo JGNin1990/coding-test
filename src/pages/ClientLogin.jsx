@@ -4,12 +4,25 @@ import { AiOutlineDoubleRight } from "react-icons/ai";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import Loading from "../components/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ClientLogin = () => {
   const [clientEmail, setClientEmail] = useState("");
   const [clientPsw, setClientPsw] = useState("");
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
+
+  const notify = (e) =>
+    toast.error(`Password or email was wrong!`, {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+
   const handleClick = async (e) => {
     setLoading(true);
     try {
@@ -27,7 +40,7 @@ const ClientLogin = () => {
     } catch (error) {
       console.log(error.message);
       setLoading(false);
-
+      notify();
     }
   };
   if (loading) {
