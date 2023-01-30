@@ -17,7 +17,7 @@ const AdminHome = () => {
   const reportsCollectionRef = collection(db, "reports");
 
   const successNotify = (e) =>
-    toast.success(`Successfully! ${e}`, {
+    toast.success(`Successfully ${e}!`, {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -30,20 +30,21 @@ const AdminHome = () => {
     const pendingDoc = doc(db, "reports", id);
     await updateDoc(pendingDoc, { pending: true, receive: false });
     successNotify("Accept");
+    window.location.reload();
     // console.log(id, pending);
   };
   const updateDiscuss = async (id, discuss) => {
     const discussDoc = doc(db, "reports", id);
     await updateDoc(discussDoc, { discuss: true, receive: false });
     successNotify("Discuss");
-
+    window.location.reload();
     // console.log(id, discuss);
   };
   const updateDecline = async (id, decline) => {
     const declineDoc = doc(db, "reports", id);
     await updateDoc(declineDoc, { decline: true, receive: false });
     successNotify("Decline");
-
+    window.location.reload();
     // console.log(id, decline);
   };
 
